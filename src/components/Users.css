@@ -14,36 +14,56 @@
     width: 1.6rem;
     background-color: gainsboro;
     margin-left: 0.2rem;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;       
+    border-width: 0.05rem;
+    border-color: gray;
+    box-shadow: 0 0 0.2rem #FF6633;
 }
 
 .operations {
     height: 1.6rem;
     width: 1.0rem;
     background-color: goldenrod;
-    margin-right: 0.2rem;      
+    margin-right: 0.2rem;   
+    overflow: hidden;   
 }
 
 .content {
     height: 1.6rem;
     width: 1.6rem;
-    background-color: skyblue;
     margin-right: 0.2rem; 
     margin-left: 0.2rem;
     flex-grow: 1;
     display: inline-flex;
     flex-direction: column;
-    justify-content: space-around;    
+    justify-content: space-between;    
 }
 
 .title {
-    font-size: 0.4rem;    
-    background-color: khaki;
-    overflow-x: hidden;
-    overflow-y: visible;
-    /* overflow-wrap: normal; */
+    margin: 20px 0px 0px 0px;
+    overflow: hidden;
+    display: -webkit-box;  
+    -webkit-line-clamp: 2;  
+    -webkit-box-orient: vertical;  
+    font-weight: bold;
+    font-family: PingFangSC-Regular, sans-serif;
+    font-size: 0.3rem;
 }
 
 .description {
-    font-size: 0.4rem;
-    background-color: lavender;
+    margin: 10px 0px 20px 0px;
+    flex-grow: 1;
+    font-size: 0.25rem;
+    color: gray;
+    font-family: PingFangSC-Regular, sans-serif;
+}
+
+.imgFill {
+    object-fit: cover;        
+    height: 100%;
+    width: 100%;
 }

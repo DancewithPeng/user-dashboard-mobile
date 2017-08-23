@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { ListView } from 'antd-mobile'
 import styles from './Users.css'
+import request from '../utils/request'
 
 class Users extends React.Component {
 
     getRowData = (dataBlod, sectionID, rowID) => {        
-        return `${sectionID} - ${rowID}`        
+        return dataBlod[rowID]
     }
 
     state = {
@@ -15,17 +16,46 @@ class Users extends React.Component {
             sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
         }),
         sectionIDs: [0],
-        rowIDs: [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]]
+        rowIDs: [[]],
+        dataBlod: {}
+    }    
+
+    componentDidMount() {       
+        request(`/api/users?_page=${1}&_limit=10`).then(({data})=>{
+            let rowIDs = []
+            let dataBlod = {}
+            for (const obj of data) {
+                rowIDs.push(obj.id)
+                dataBlod[obj.id] = obj
+            }
+
+            this.setState({ 
+                rowIDs: [rowIDs], 
+                dataBlod: dataBlod
+            })
+        }, (error)=>{
+            console.log(error)
+        })        
     }
 
     // UI
     row = (rowData, sectionID, rowID) => {
         return (
             <div className={styles.row}>
-                <div className={styles.avatar}>Avatar</div>
+                <div className={styles.avatar}>
+                    <img className={styles.imgFill} src={require('../assets/yay.jpg')} />
+                </div>
                 <div className={styles.content}>
-                    <p className={styles.title}>Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title Title</p>
-                    <div className={styles.description}>Description</div>
+                    <div className={styles.title}>
+
+                        { rowData.name }
+
+                    </div>
+                    <div className={styles.description}>
+
+                        { `${rowData.address.city} ${rowData.address.street} ${rowData.address.suite}` }
+
+                    </div>
                 </div>
                 <div className={styles.operations}>Operations</div>
             </div>
@@ -42,10 +72,11 @@ class Users extends React.Component {
     render() {
         return (
             <ListView
-                dataSource={this.state.dataSource.cloneWithRowsAndSections(null, this.state.sectionIDs, this.state.rowIDs)}
+                dataSource={this.state.dataSource.cloneWithRowsAndSections(this.state.dataBlod, this.state.sectionIDs, this.state.rowIDs)}
                 renderRow={this.row}
                 renderSeparator={this.separator}
                 useBodyScroll
+                pageSize={20}
             />
         )
     }
