@@ -1,0 +1,49 @@
+.row {
+    display: flex;       
+    height: 2.0rem;
+    align-items: center;   
+}
+
+.separator {
+    height: 0.01rem;
+    background-color: gainsboro;
+}
+
+.avatar {
+    height: 1.6rem;
+    width: 1.6rem;
+    background-color: gainsboro;
+    margin-left: 0.2rem;
+}
+
+.operations {
+    height: 1.6rem;
+    width: 1.0rem;
+    background-color: goldenrod;
+    margin-right: 0.2rem;      
+}
+
+.content {
+    height: 1.6rem;
+    width: 1.6rem;
+    background-color: skyblue;
+    margin-right: 0.2rem; 
+    margin-left: 0.2rem;
+    flex-grow: 1;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-around;    
+}
+
+.title {
+    font-size: 0.4rem;    
+    background-color: khaki;
+    overflow-x: hidden;
+    overflow-y: visible;
+    /* overflow-wrap: normal; */
+}
+
+.description {
+    font-size: 0.4rem;
+    background-color: lavender;
+}
