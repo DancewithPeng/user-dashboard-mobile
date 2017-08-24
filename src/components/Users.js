@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ListView } from 'antd-mobile'
+import { ListView, NavBar, Icon } from 'antd-mobile'
 import styles from './Users.css'
 import request from '../utils/request'
 
@@ -71,15 +71,38 @@ class Users extends React.Component {
 
     render() {
         return (
-            <ListView
-                dataSource={this.state.dataSource.cloneWithRowsAndSections(this.state.dataBlod, this.state.sectionIDs, this.state.rowIDs)}
-                renderRow={this.row}
-                renderSeparator={this.separator}
-                useBodyScroll
-                pageSize={20}
-            />
+            <div style={{ display: 'flex', flexDirection: 'column', height: document.documentElement.clientHeight }}>                
+                <NavBar 
+                    leftContent="back"
+                    mode="dark"
+                    onLeftClick={() => console.log('onLeftClick')}
+                    rightContent={[
+                        <Icon key="0" type="search" style={{ marginRight: '0.32rem' }} />,
+                        <Icon key="1" type="ellipsis" />,
+                    ]}
+                    style={{
+                        fontSize: '1.0rem'                        
+                    }}
+                >
+                用户列表
+                </NavBar>
+
+                <ListView
+                    dataSource={this.state.dataSource.cloneWithRowsAndSections(this.state.dataBlod, this.state.sectionIDs, this.state.rowIDs)}
+                    renderRow={this.row}
+                    renderSeparator={this.separator}
+                    // useBodyScroll
+                    style={{
+                        height: 'auto',
+                        overflow: 'auto',
+                        flexGrow: '1'
+                    }}
+                    pageSize={20}
+                />
+            </div>
         )
     }
 }
 
 export default Users
+

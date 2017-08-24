@@ -1,0 +1,35 @@
+:global(.example-appear) { 
+    opacity: 0.01;
+}
+
+:global(.example-appear.example-appear-active) { 
+    opacity: 1;
+    transition: opacity .5s ease-in;
+}
+
+/* 组件进入 动画开始状态 */
+:global(.example-enter) { 
+    opacity: 0.01;
+}
+
+/* 组件进入 动画结束状态 */
+:global(.example-enter.example-enter-active) {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+/* 组件离开 动画开始状态 */
+:global(.example-leave) {
+    opacity: 1;
+}
+
+/* 组件离开 动画结束状态 */
+:global(.example-leave.example-leave-active) {
+    opacity: 0.01;
+    transition: opacity 300ms ease-out;
+}
+
+:global(.my-test) {
+    color: white;
+    background-color: blue;
+}
