@@ -26,10 +26,13 @@
 
 .operations {
     height: 1.6rem;
-    width: 1.0rem;
-    background-color: goldenrod;
-    margin-right: 0.2rem;   
-    overflow: hidden;   
+    width: 1.5rem;
+    margin-right: 0.2rem;       
+    overflow: hidden;       
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: baseline;
 }
 
 .content {

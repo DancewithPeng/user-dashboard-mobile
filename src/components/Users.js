@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ListView, NavBar, Icon } from 'antd-mobile'
+import { ListView, NavBar, Icon, Button } from 'antd-mobile'
 import styles from './Users.css'
 import request from '../utils/request'
 
@@ -21,21 +21,26 @@ class Users extends React.Component {
     }    
 
     componentDidMount() {       
-        request(`/api/users?_page=${1}&_limit=10`).then(({data})=>{
-            let rowIDs = []
-            let dataBlod = {}
-            for (const obj of data) {
-                rowIDs.push(obj.id)
-                dataBlod[obj.id] = obj
-            }
+        // request(`/api/users?_page=${1}&_limit=10`).then(({data})=>{
+        //     let rowIDs = []
+        //     let dataBlod = {}
+        //     for (const obj of data) {
+        //         rowIDs.push(obj.id)
+        //         dataBlod[obj.id] = obj
+        //     }
 
-            this.setState({ 
-                rowIDs: [rowIDs], 
-                dataBlod: dataBlod
-            })
-        }, (error)=>{
-            console.log(error)
-        })        
+        //     this.setState({ 
+        //         rowIDs: [rowIDs], 
+        //         dataBlod: dataBlod
+        //     })
+        // }, (error)=>{
+        //     console.log(error)
+        // })        
+    }
+
+    // event handlers
+    handleAdd = () => {
+        alert('+++++++++')
     }
 
     // UI
@@ -57,7 +62,10 @@ class Users extends React.Component {
 
                     </div>
                 </div>
-                <div className={styles.operations}>Operations</div>
+                <div className={styles.operations}>
+                    <Button type='ghost' style={{ borderWidth: '0', fontFamily: 'PingFangSC-Regular, sans-serif' }} inline size='small'>Edit</Button>
+                    <Button type='warning' style={{ borderWidth: '0', fontFamily: 'PingFangSC-Regular, sans-serif' }} inline size='small'>Delete</Button>
+                </div>
             </div>
         )
     }
@@ -72,17 +80,12 @@ class Users extends React.Component {
     render() {
         return (
             <div style={{ display: 'flex', flexDirection: 'column', height: document.documentElement.clientHeight }}>                
-                <NavBar 
-                    leftContent="back"
-                    mode="dark"
-                    onLeftClick={() => console.log('onLeftClick')}
-                    rightContent={[
-                        <Icon key="0" type="search" style={{ marginRight: '0.32rem' }} />,
-                        <Icon key="1" type="ellipsis" />,
+                <NavBar   
+                    mode="dark"                    
+                    rightContent={[                        
+                        <p key='+' style={{ fontSize: '0.6rem', marginRight: '0.2rem' }} onClick={this.handleAdd}>+</p>,
                     ]}
-                    style={{
-                        fontSize: '1.0rem'                        
-                    }}
+                    iconName={null}
                 >
                 用户列表
                 </NavBar>
