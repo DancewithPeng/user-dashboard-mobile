@@ -5,7 +5,7 @@ import request from '../utils/request'
 
 class Users extends React.Component {
 
-    getRowData = (dataBlod, sectionID, rowID) => {        
+    getRowData = (dataBlod, sectionID, rowID) => {                
         return dataBlod[rowID]
     }
 
@@ -19,24 +19,6 @@ class Users extends React.Component {
         rowIDs: [[]],
         dataBlod: {}
     }    
-
-    componentDidMount() {       
-        // request(`/api/users?_page=${1}&_limit=10`).then(({data})=>{
-        //     let rowIDs = []
-        //     let dataBlod = {}
-        //     for (const obj of data) {
-        //         rowIDs.push(obj.id)
-        //         dataBlod[obj.id] = obj
-        //     }
-
-        //     this.setState({ 
-        //         rowIDs: [rowIDs], 
-        //         dataBlod: dataBlod
-        //     })
-        // }, (error)=>{
-        //     console.log(error)
-        // })        
-    }
 
     // event handlers
     handleAdd = () => {
@@ -53,7 +35,7 @@ class Users extends React.Component {
                 <div className={styles.content}>
                     <div className={styles.title}>
 
-                        { rowData.name }
+                        { `${rowID}.${rowData.name}` }
 
                     </div>
                     <div className={styles.description}>
@@ -78,6 +60,7 @@ class Users extends React.Component {
     }
 
     render() {
+        // display: 'flex', flexDirection: 'column',
         return (
             <div style={{ display: 'flex', flexDirection: 'column', height: document.documentElement.clientHeight }}>                
                 <NavBar   
@@ -91,7 +74,7 @@ class Users extends React.Component {
                 </NavBar>
 
                 <ListView
-                    dataSource={this.state.dataSource.cloneWithRowsAndSections(this.state.dataBlod, this.state.sectionIDs, this.state.rowIDs)}
+                    dataSource={this.state.dataSource.cloneWithRowsAndSections(this.props.dataBlod, [0], this.props.rowIDs)}
                     renderRow={this.row}
                     renderSeparator={this.separator}
                     // useBodyScroll
@@ -101,6 +84,11 @@ class Users extends React.Component {
                         flexGrow: '1'
                     }}
                     pageSize={20}
+                    onEndReached={this.props.onEndReached}
+                    onEndReachedThreshold={10}
+                    // scrollRenderAheadDistance={500}
+                    // scrollEventThrottle={200}
+                    // onScroll={this.props.onEndReached}
                 />
             </div>
         )

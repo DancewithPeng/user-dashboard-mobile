@@ -8,17 +8,24 @@ export default {
         list: [],
         page: 1,
         pageSize: 10,
+        total: 0
     },
     
     effects: {
         *fetch({ payload: { page } }, { call, put }) {  // eslint-disable-line
-            console.log(page)
+
             // call 只能调用function
-            const { data } = yield call(request, `/api/users?_page=${1}&_limit=10`)
+            const { data, error } = yield call(request, `/api/users?_page=${page}&_limit=10`)                        
+
+            console.log(`=============>`)
+            console.log(error)
+            console.log(data)
+
             yield put({
                 type: 'save',
                 payload: {
-                    data                    
+                    data,
+                    page
                 }
             })
         },
@@ -26,9 +33,17 @@ export default {
     
     reducers: {
         save(state, { type, payload: { data }}) {
+
+            console.log(`--------------------------`)
             console.log(state)
-            const ret = {...state, list: data, page: 2}
-            console.log(ret)
+            console.log(data)
+            console.log(state.list)
+            const newList = [...state.list, ...data]
+            const ret = {...state, list: newList}
+
+            console.log(state.list)
+            console.log(newList)
+
             return ret
         },
     },    
@@ -48,7 +63,6 @@ export default {
                             page: 1
                         }
                     });
-                    console.log('Hello')
                 }
             });
         },
